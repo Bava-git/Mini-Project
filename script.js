@@ -7,7 +7,7 @@ var table = document.getElementById("table_tbody");
 let lastPageno = 0;
 
 // fetch Data from github
-async function fetchData() {
+const fetchData = async () => {
     try {
         const response = await fetch(apiUrl);
         allData = await response.json();
@@ -80,14 +80,12 @@ const loadPage = (pageNumber) => {
     if (pageNumber === -1) {
         pageNumber = lastPageno - 1;
         if (pageNumber <= 0) {
-            pageNumber = lastPage;
+            pageNumber = 1;
         }
     } else if (pageNumber === -2) {
         pageNumber = lastPageno + 1;
-        if (pageNumber == lastPage) {
+        if (pageNumber >= lastPage) {
             pageNumber = lastPage;
-        } else if (pageNumber > lastPage) {
-            pageNumber = 1;
         }
     }
 
