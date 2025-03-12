@@ -1,0 +1,72 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin-top: 50px;
+}
+
+.paginationContainer {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paginationContainer button {
+    padding: 5px;
+    border: 1px solid #337ABA;
+    height: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.before {
+    background-color: #ffffff;
+    color: #337ABA;
+}
+
+.actived {
+    background-color: #337ABA;
+    color: #ffffff;
+}
+
+.title {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: lightblue;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.description {
+    margin: 10px 0;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.th_sno {
+    width: 80px;
+}
+
+.td_id {
+    text-align: center;
+}
+
+th,
+td {
+    padding: 5px;
+}
