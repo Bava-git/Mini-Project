@@ -80,12 +80,14 @@ const loadPage = (pageNumber) => {
     if (pageNumber === -1) {
         pageNumber = lastPageno - 1;
         if (pageNumber <= 0) {
-            pageNumber = 1;
+            pageNumber = lastPage;
         }
     } else if (pageNumber === -2) {
         pageNumber = lastPageno + 1;
-        if (pageNumber >= lastPage) {
+        if (pageNumber == lastPage) {
             pageNumber = lastPage;
+        } else if (pageNumber > lastPage) {
+            pageNumber = 1;
         }
     }
 
