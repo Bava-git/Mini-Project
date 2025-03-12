@@ -3,8 +3,10 @@ let allData = [];
 const itemsPerPage = 10;
 const activeBnStatus = document.getElementById("activeBnStatus");
 const paginationContainer = document.getElementById("buttons");
+var table = document.getElementById("table_tbody");
 let lastPageno = 0;
 
+// fetch Data from github
 async function fetchData() {
     try {
         const response = await fetch(apiUrl);
@@ -17,8 +19,10 @@ async function fetchData() {
 
 fetchData();
 
+// Creating Pagination buttons
 const generatePagination = () => {
     let forRunCount = allData.length / itemsPerPage;
+    forRunCount = Math.ceil(forRunCount);
 
     const firstBn = document.createElement("button");
     firstBn.classList.add("before", "links");
@@ -38,7 +42,6 @@ const generatePagination = () => {
     paginationContainer.appendChild(previosBn);
 
     for (let i = 2; i <= forRunCount - 1; i++) {
-        const element = allData[i];
         let link = document.createElement("button");
         link.classList.add("before", "links");
         link.textContent = i;
@@ -68,9 +71,11 @@ const generatePagination = () => {
     loadPage(1);
 }
 
+// Load the pages and table
 const loadPage = (pageNumber) => {
 
     let lastPage = allData.length / itemsPerPage;
+    lastPage = Math.ceil(lastPage);
 
     if (pageNumber === -1) {
         pageNumber = lastPageno - 1;
@@ -87,13 +92,13 @@ const loadPage = (pageNumber) => {
     lastPageno = pageNumber;
     paginationColor(pageNumber);
 
+    // Display the changes
     activeBnStatus.textContent = `Change: ${pageNumber}`;
     const startFrom = (pageNumber - 1) * itemsPerPage;
     const endTo = startFrom + itemsPerPage;
     const dataPerPage = allData.slice(startFrom, endTo);
 
-    const reset_td = document.querySelectorAll("td");
-    reset_td.forEach(td => td.remove());
+    table.innerHTML = "";
 
     dataPerPage.forEach(item => {
         let tr = document.createElement("tr");
@@ -111,11 +116,12 @@ const loadPage = (pageNumber) => {
         td_email.textContent = item.email;
         tr.appendChild(td_email);
 
-        document.getElementById("tableResponsive").appendChild(tr);
+        table.appendChild(tr);
     });
 
 }
 
+// Control class name
 const paginationColor = (pageNumber) => {
     document.querySelectorAll(".links").forEach(e => {
         e.classList.replace("actived", "before");
