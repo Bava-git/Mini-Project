@@ -70,3 +70,19 @@ th,
 td {
     padding: 5px;
 }
+
+.descriptionDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin: 0 30px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 15px 0px;
+}

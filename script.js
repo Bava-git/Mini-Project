@@ -1,10 +1,17 @@
 const apiUrl = "https://raw.githubusercontent.com/Rajavasanthan/jsondata/master/pagenation.json";
 let allData = [];
-const itemsPerPage = 10;
-const activeBnStatus = document.getElementById("activeBnStatus");
+const pageNo = document.getElementById("pageNo");
 const paginationContainer = document.getElementById("buttons");
 var table = document.getElementById("table_tbody");
 let lastPageno = 0;
+
+let itemsPerPage = 10;
+let getPageCount = document.getElementById("itemsPerPage");
+
+document.getElementById("itemsPerPage").addEventListener("change", () => {
+    itemsPerPage = Number(getPageCount.value);
+    generatePagination();
+});
 
 // fetch Data from github
 const fetchData = async () => {
@@ -23,6 +30,9 @@ fetchData();
 const generatePagination = () => {
     let forRunCount = allData.length / itemsPerPage;
     forRunCount = Math.ceil(forRunCount);
+
+
+    paginationContainer.innerHTML = "";
 
     const firstBn = document.createElement("button");
     firstBn.classList.add("before", "links");
@@ -93,13 +103,13 @@ const loadPage = (pageNumber) => {
     paginationColor(pageNumber);
 
     // Display the changes
-    activeBnStatus.textContent = `Change: ${pageNumber}`;
+    pageNo.textContent = `Page: ${pageNumber}`;
     const startFrom = (pageNumber - 1) * itemsPerPage;
     const endTo = startFrom + itemsPerPage;
+
     const dataPerPage = allData.slice(startFrom, endTo);
 
     table.innerHTML = "";
-
     dataPerPage.forEach(item => {
         let tr = document.createElement("tr");
         let td_id = document.createElement("td");
